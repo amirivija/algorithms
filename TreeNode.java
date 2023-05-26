@@ -49,4 +49,29 @@ public class TreeNode {
 	}
    }
 
+   // https://leetcode.com/problems/count-good-nodes-in-binary-tree/
+   // Given a binary tree root, a node X in the tree is named good if in the path from root to X 
+   // there are no nodes with a value greater than X.
+	public int goodNodes(TreeNode root) {
+		return getNumberOfGoodNodes(root, root.val, 1);
+    	}
+
+	private int getNumberOfGoodNodes(TreeNode root, int currentMax, int currentGoodNodes) {
+		if (root == null) {
+			return 0;
+		}
+	int isCurrentNodeGood = 0;
+	
+	if(root.val >= currentMax) {
+		currentMax = root.val;
+		currentGoodNodes++;
+		isCurrentNodeGood = 1;
+	}
+
+	int leftGoodNodes = getNumberOfGoodNodes(root.left, currentMax, currentGoodNodes);
+	int rightGoodNodes = getNumberOfGoodNodes(root.right, currentMax, currentGoodNodes);
+	return leftGoodNodes + rightGoodNodes + isCurrentNodeGood;
+	
+	}
+
 }
