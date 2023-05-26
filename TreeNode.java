@@ -1,3 +1,9 @@
+import java.util.LinkedList;
+import java.util.Deque;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+
 public class TreeNode {
 	int val;
 	TreeNode left, right;
@@ -73,5 +79,51 @@ public class TreeNode {
 	return leftGoodNodes + rightGoodNodes + isCurrentNodeGood;
 	
 	}
+
+// https://leetcode.com/problems/binary-tree-right-side-view/description/
+// If you are standing to the right of the binary tree, get the values that you will see at each level.
+// This will be the rightmost node in each level.
+// Use a BFS, at each level iteration, the Deque will have all the nodes in the level. Get the rightmost node from that level
+//
+   public List<Integer> rightSideView(TreeNode root) {
+ if(root == null) {
+   return Collections.emptyList();
+ }
+
+
+ List<Integer> rightMostValues = new ArrayList<Integer>();
+
+// Queue for BFS Traversal
+ Deque<TreeNode> bfsTraversal = new LinkedList<TreeNode>();
+
+//Initializing the traversal by adding the root
+ bfsTraversal.add(root);
+
+// traversing through levels until no more nodes are present
+ while(!bfsTraversal.isEmpty()) {
+  
+   int levelLength = bfsTraversal.size();
+   // get the rightmost value. peek, but dont remove.
+   rightMostValues.add(bfsTraversal.peekLast().val);
+   for( int i = 0; i < levelLength; i++) {
+     TreeNode node = bfsTraversal.remove();
+    
+     if( node.left != null) {
+       bfsTraversal.add(node.left);
+       }
+
+     if( node.right != null) {
+        bfsTraversal.add(node.right);
+        }
+     }
+   }
+
+
+
+
+ return rightMostValues;
+
+
+}
 
 }
