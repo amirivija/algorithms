@@ -126,4 +126,51 @@ public class TreeNode {
 
 }
 
+//https://leetcode.com/problems/find-largest-value-in-each-tree-row/description/
+//Traverse each level in a BFS. Get the max value while traversing each level and store it in an array
+public List<Integer> largestValues(TreeNode root) {
+   if(root == null) {
+   return Collections.emptyList();
+ }
+
+
+// Queue to traverse
+ Deque<TreeNode> bfsTraversal = new LinkedList<TreeNode> ();
+
+
+// List to store the max elements in each level
+ List<Integer> maxElements = new ArrayList<Integer>();
+
+
+ bfsTraversal.add(root);
+
+
+ while(!bfsTraversal.isEmpty()) {
+
+
+   int levelLength = bfsTraversal.size();
+   int levelMax  = Integer.MIN_VALUE;
+   for(int i = 0; i < levelLength; i++ ) {
+     TreeNode node = bfsTraversal.remove();
+	// get the max in each level.
+     if(node.val > levelMax) {
+       levelMax = node.val;
+     }
+
+
+     if(node.left != null) {
+       bfsTraversal.add(node.left);
+     }
+     if(node.right != null) {
+       bfsTraversal.add(node.right);
+     }
+   }
+ maxElements.add(levelMax);
+
+
+ }
+ return maxElements;
+
+
+}
 }
