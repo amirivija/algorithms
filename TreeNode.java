@@ -21,4 +21,32 @@ public class TreeNode {
 	return max + 1;
 
     }
+   
+   //https://leetcode.com/problems/path-sum/description/
+   //Given the root of a binary tree and an integer targetSum, return true if the tree has a root-to-leaf
+   // path such that adding up all the values along the path equals targetSum. 
+    public boolean hasPathSum(TreeNode root, int targetSum) {
+      if(root == null) {
+	// There is no path sum for an empty tree.
+	return false;
+      }
+
+
+	if (root.left == null && root.right == null) {
+		// leaf node
+		if(root.val == targetSum) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+
+	if(hasPathSum(root.left, targetSum - root.val) || hasPathSum(root.right, targetSum - root.val)) {
+		return true;
+	} else {
+		return false;
+	}
+   }
+
 }
