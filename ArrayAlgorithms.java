@@ -73,6 +73,52 @@ return false;
 
     }
 
+
+/*
+ * O(n) algorithm to find the sorted squares of an non-decreasing array
+ *https://leetcode.com/problems/squares-of-a-sorted-array/
+ * */
+
+    public int[] sortedSquares(int[] array) {
+
+        int rightPointer = array.length - 1, leftPointer = 0, destPointer = array.length - 1;
+        int[] result = new int[array.length];
+        while ( leftPointer <= rightPointer) {
+            int leftSquare = array[leftPointer] * array[leftPointer];
+            int rightSquare = array[rightPointer] * array[rightPointer];
+
+            if(leftSquare > rightSquare) {
+                result[destPointer] = leftSquare;
+                leftPointer ++;
+                destPointer --;
+            } else if (rightSquare > leftSquare) {
+                result[destPointer] = rightSquare;
+                rightPointer --;
+                destPointer --;
+            } else {
+                // both squares are equal
+                if(leftPointer == rightPointer) {
+                    //both left and right pointer have reached the same point in the main array
+                    result[destPointer] = leftSquare;
+                    leftPointer ++;
+                    destPointer --;
+                } else {
+                    result[destPointer] = leftSquare;
+                    leftPointer ++;
+                    destPointer --;
+
+
+                    result[destPointer] = rightSquare;
+                    rightPointer --;
+                    destPointer --;
+                }
+
+            }
+
+
+        }
+        return result;
+    }
 public static void main(String args[]) {
 	int[] sortedArray1 = {1, 5, 7, 9}, sortedArray2 = {2, 4, 8, 12};
 	ArrayAlgorithms aa = new ArrayAlgorithms();
