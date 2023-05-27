@@ -36,6 +36,42 @@ public class ArrayAlgorithms {
 	return mergedArray;
 }
 
+/* https://leetcode.com/problems/is-subsequence/description/
+ * Given two strings s and t, return true if s is a subsequence of t, or false otherwise.
+ * A subsequence of a string is a new string that is formed from the original string by deleting some (can be none) of the characters without i
+ * disturbing the relative positions of the remaining characters. (i.e., "ace" is a subsequence of "abcde" while "aec" is not).
+* Solution: Two pointers - one in the source and other in the target array.
+* Iterate over the source array.
+* If ther source and target character matches, increment the target array pointer to find the next match
+* If the entire target array is traversed, then the subsequence match has been found
+*/
+    public boolean isSubsequence(String target, String source) {
+        int sourceIndex = 0, targetIndex = 0;
+
+while(targetIndex < target.length() && sourceIndex < source.length()){
+
+char currentSourceCharacter = source.charAt(sourceIndex);
+char currentTargetCharacter = target.charAt(targetIndex);
+
+if(currentTargetCharacter == currentSourceCharacter) {
+	// next char in subsequence found. increment both.
+	targetIndex++;
+	System.out.println("Target: found character " + currentTargetCharacter);
+}
+	System.out.println("source character iter " + currentSourceCharacter);
+
+	sourceIndex++;
+
+}
+
+if(targetIndex == target.length()) {
+	// TargetIndex has reached the end of the target due to finding subsequence
+	return true;
+}
+
+return false;
+
+    }
 
 public static void main(String args[]) {
 	int[] sortedArray1 = {1, 5, 7, 9}, sortedArray2 = {2, 4, 8, 12};
