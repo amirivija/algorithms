@@ -142,6 +142,37 @@ return false;
 
         return maxSum/k;
     }
+
+/** STEP SuM
+ * Given an array of integers nums, you start with an initial positive value startValue.
+ * In each iteration, you calculate the step by step sum of startValue plus elements in nums (from left to right).
+ * Return the minimum positive value of startValue such that the step by step sum is never less than 1.
+ *
+ */
+
+public int minStartValue(int[] nums) {
+        	int lowestStepValue, result;
+	int[] prefixSum = new int[nums.length];
+
+	prefixSum[0] = nums[0];
+	lowestStepValue = prefixSum[0];
+
+	for( int i = 1; i < nums.length; i++) {
+		prefixSum[i] = prefixSum[i-1] + nums[i];
+		lowestStepValue = Integer.min(lowestStepValue, prefixSum[i]);
+	}
+
+	if(lowestStepValue <= 0) {
+		result = (-1 * lowestStepValue) + 1;
+	}  else {
+		result = 1;
+	} 
+	return result;
+		
+
+    }
+}
+
 public static void main(String args[]) {
 	int[] sortedArray1 = {1, 5, 7, 9}, sortedArray2 = {2, 4, 8, 12};
 	ArrayAlgorithms aa = new ArrayAlgorithms();
