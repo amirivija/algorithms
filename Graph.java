@@ -69,5 +69,44 @@ class Graph {
    }
    return graph;
    }
+
+
+ //-----------------------------------------------------------------
+ //
+ //
+ //Find all paths from 0 to N in a graph. Soluton using backtracking.
+ //DFS the graph. if you hit N, copy the path into the destination array.
+ //if not, add the current node to the path, and do a dfs seach, then backtrack
+ 
+        int N;
+        List<List<Integer>> paths;
+        int[][] graphInput;
+        List<List<Integer>> result;
+
+        public List<List<Integer>> allPathsSourceTarget(int[][] graph) {
+            N = graph.length - 1;
+            LinkedList<Integer> path = new LinkedList<Integer>();
+            result = new ArrayList<List<Integer>>();
+            graphInput = graph;
+
+            path.add(0);
+            allPathsCurrentToTarget(0, path);
+            return result;
+        }
+
+        private void allPathsCurrentToTarget(int current, LinkedList<Integer> pathSoFar) {
+        if(current == N) {
+            result.add( new ArrayList<Integer>(pathSoFar));
+            return;
+        }
+
+        for(int child: graphInput[current]) {
+            //System.out.println(child);
+            pathSoFar.add(child);
+            //System.out.println(pathSoFar);
+            allPathsCurrentToTarget( child, pathSoFar);
+            pathSoFar.removeLast();
+            }
+        }
 }
 
