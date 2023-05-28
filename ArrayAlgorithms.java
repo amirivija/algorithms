@@ -119,6 +119,29 @@ return false;
         }
         return result;
     }
+
+/*Given an array and a subarray length k, find the maximum average for a subarray of length k
+ * */
+
+    public double findMaxAverage(int[] nums, int k) {
+
+        int leftPointer = 0, rightPointer, currentSum = 0;
+        double maxSum;
+
+        for(rightPointer = 0; rightPointer < k; rightPointer++) {
+            currentSum += nums[rightPointer];
+        }
+
+        maxSum = currentSum;
+
+        for(rightPointer = k; rightPointer < nums.length; rightPointer++, leftPointer++) {
+            currentSum = currentSum + nums[rightPointer] - nums[leftPointer];
+
+            maxSum = Math.max(maxSum, currentSum);
+        }
+
+        return maxSum/k;
+    }
 public static void main(String args[]) {
 	int[] sortedArray1 = {1, 5, 7, 9}, sortedArray2 = {2, 4, 8, 12};
 	ArrayAlgorithms aa = new ArrayAlgorithms();
